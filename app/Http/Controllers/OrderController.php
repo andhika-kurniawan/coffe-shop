@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Order;
+use Illuminate\Http\Request;
+
+class OrderController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
+    {
+        $query = Order::where('user_id', auth()->id())
+            ->with('items.menu')
+            ->latest();
+
+        if ($request->has('status') && $request->status !== '') {
+            $query->where('status', $request->status);
+        }
+
+        $orders = $query->paginate(10);
+
+        return view('orders.index', compact('orders'));
+    }
+
+    public function show(Order $order)
+    {
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $order->load('items.menu', 'user');
+
+        return view('orders.show', compact('order'));
+    }
+}
