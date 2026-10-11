@@ -24,6 +24,7 @@ class CartController extends Controller
             'menu_id' => 'required|exists:menus,id',
             'quantity' => 'required|integer|min:1',
             'options' => 'nullable|array',
+            'notes' => 'nullable|string|max:500',
         ]);
 
         $cart = session()->get('cart', []);
@@ -37,6 +38,7 @@ class CartController extends Controller
                 'menu_id' => $validated['menu_id'],
                 'quantity' => $validated['quantity'],
                 'options' => $validated['options'] ?? [],
+                'notes' => $validated['notes'] ?? null,
             ];
         }
 

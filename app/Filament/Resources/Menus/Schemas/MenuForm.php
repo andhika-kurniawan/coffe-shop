@@ -34,6 +34,7 @@ class MenuForm
                     ->step(0.01),
                 FileUpload::make('image')
                     ->image()
+                    ->disk('public')
                     ->directory('menus'),
                 ToggleButtons::make('status')
                     ->options([

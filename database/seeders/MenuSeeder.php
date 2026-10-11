@@ -38,9 +38,8 @@ class MenuSeeder extends Seeder
             ['category' => 'Beverages', 'name' => 'Lemonade', 'description' => 'Refreshing homemade lemonade', 'price' => 20000],
         ];
 
-        $coffeeSugarOptions = Option::where('type', 'sugar')->get();
+        $sugarOptions = Option::where('type', 'sugar')->get();
         $iceOptions = Option::where('type', 'ice')->get();
-        $milkOptions = Option::where('type', 'milk')->get();
 
         foreach ($menus as $menuData) {
             $category = Category::where('name', $menuData['category'])->first();
@@ -53,11 +52,8 @@ class MenuSeeder extends Seeder
                 'status' => 'available',
             ]);
 
-            if ($menuData['category'] === 'Coffee') {
-                $menu->options()->attach($coffeeSugarOptions->pluck('id'));
-                $menu->options()->attach($iceOptions->pluck('id'));
-                $menu->options()->attach($milkOptions->pluck('id'));
-            }
+            $menu->options()->attach($sugarOptions->pluck('id'));
+            $menu->options()->attach($iceOptions->pluck('id'));
         }
     }
 }

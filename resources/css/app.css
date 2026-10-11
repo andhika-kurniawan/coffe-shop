@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+    
+    body {
+        @apply bg-background text-primary antialiased;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-opacity-90 active:scale-95;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center rounded-lg border border-border bg-white px-6 py-3 font-medium text-primary transition-colors hover:bg-neutral;
+    }
+
+    .card {
+        @apply rounded-xl border border-border bg-white;
+    }
+
+    .input {
+        @apply rounded-lg border border-border bg-white px-4 py-3 font-normal text-primary placeholder-gray-500 transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary;
+    }
+
+    .badge {
+        @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+    }
+
+    .container-narrow {
+        @apply mx-auto max-w-3xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .container-wide {
+        @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+    }
+}
